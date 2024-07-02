@@ -6,7 +6,7 @@ Student ID: 400413494_400411261
 
 Report:
 
-Explaining Assembly.s code:
+_Explaining Assembly.s code:
 
 The purpose of this code is to compute the sum of the square roots of the squares of pairs of 
 
@@ -34,7 +34,7 @@ to the stack pointer.
 
   fadd.s adds the value in f0 with f3.
 
-Fixed-Point Unit Module:
+_Fixed-Point Unit Module:
 
  Parameters:
 
@@ -68,7 +68,7 @@ Fixed-Point Unit Module:
 
   5.The root and product signals are placeholders for the square root and multiplication results. 
 
-Square Root Circuit :
+_Square Root Circuit :
 
  1. root
 
@@ -115,7 +115,7 @@ Square Root Circuit :
 
     The final value of root_reg represents the approximate square root of the input.
 
-Multiplier multiplier_circuit:
+_Multiplier multiplier_circuit:
  
  Inputs:
    .operand_1(multiplierCircuitInput1)
@@ -148,7 +148,7 @@ Multiplier multiplier_circuit:
 
      These represent intermediate results during the multiplication process.
 
- module multiplier_32bit :
+ _module multiplier_32bit :
 
   Module Declaration:
 
