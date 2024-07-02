@@ -201,6 +201,18 @@ Multiplier multiplier_circuit:
     partialProduct4 is left-shifted by 48 bits.
 
     The product output is the sum of these partial products.
+
+    waveforms:
     
     
 ![1](https://github.com/Rozhaha/LUMOS/assets/159628882/6b754613-d6fd-4bde-aded-34a025e1e6ee)
+
+
+![2](https://github.com/Rozhaha/LUMOS/assets/159628882/b4a72091-1926-4426-84f9-a962474a8b00)
+
+![3](https://github.com/Rozhaha/LUMOS/assets/159628882/a7c94be1-5307-4ec3-9248-1eca5368c020)
+
+![4](https://github.com/Rozhaha/LUMOS/assets/159628882/c1280c32-bb7d-49a2-ab2a-7970105b14af)
+
+
+
