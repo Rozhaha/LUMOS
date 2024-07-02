@@ -202,3 +202,5 @@ Multiplier multiplier_circuit:
 
     The product output is the sum of these partial products.
     
+    
+![1](https://github.com/Rozhaha/LUMOS/assets/159628882/6b754613-d6fd-4bde-aded-34a025e1e6ee)
