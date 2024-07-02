@@ -1,48 +1,202 @@
-<img src="https://github.com/IUST-Computer-Organization/.github/blob/main/images/CompOrg_orange.png" alt="Image" width="85" height="85" style="vertical-align:middle"> LUMOS RISC-V
-=================================
-> Light Utilization with Multicycle Operational Stages (LUMOS) RISC-V Processor Core
+Name: Rozha Hasheminezhad
+Team member: Jeyran Tarbiti
+Student ID: 400413494_400411261
 
-<div align="justify">
+Report:
 
-## Introduction
+Explaining Assembly.s code:
 
-**LUMOS** is a multicycle RISC-V processor that implements a subset of `RV32I` instruction set, designed for educational use in computer organization classes at **Iran University of Science and Technology**. It allows for modular design projects, enabling students to gain hands-on experience with processor architecture.
+The purpose of this code is to compute the sum of the square roots of the squares of pairs of 
 
-## Features
+single-precision floating-point values. 
 
-- LUMOS executes instructions in multiple stages, such as `instruction_fetch`, `fetch_wait`, `fetch_done`, `decode`, `execute`, `memory_access`, and etc. This approach allows for more complex operations and better utilization of processor resources compared to single-cycle designs. This processor does not support the entire `RV32I` instruction set, which is the base integer instruction set of RISC-V. Instead, it focuses on a subset of instructions that are essential for educational purposes and demonstrating the principles of computer architecture.
+1.The li instruction loads an immediate value into a register. In this case, it sets the stack pointer (sp)
 
-- The processor is designed with modularity in mind, allowing students to work on various components of the processor. As part of their course projects, students will design different execution units, such as FPUs, control units, memory interfaces, and other modules that are integral to the processor's functionality.
+ to 0x3C00.
 
-## LUMOS Datapath
+2.The addi instruction computes the address of the global pointer (gp) by adding an immediate value (392) 
 
-In a multicycle implementation, we can break down each instruction into a series of steps corresponding to the functional unit operations that are needed. These steps can be used to create a multi-cycle implementation. In this architecture, each step will take 1 clock cycle. This allows that components in the design and different functional units to be used more than once per instruction, as long as it is used on different clock cycles. This sharing of resources can help reduce the amount of hardware required. This classic view of CPU design partitions the design of a processor into data path design and control design. Data path design focuses on the design of ALU and other functional units as well as accessing the registers and memory. Control path design focuses on the design of the state machines to decode instructions and generate the sequence of control signals necessary to appropriately manipulate the data path.
+to the stack pointer.
 
-![Alt text](https://github.com/IUST-Computer-Organization/LUMOS/blob/main/Images/Datapath_1.png "LUMOS Datapath Section 1")
-![Alt text](https://github.com/IUST-Computer-Organization/LUMOS/blob/main/Images/Datapath_2.png "LUMOS Datapath Section 2")
-![Alt text](https://github.com/IUST-Computer-Organization/LUMOS/blob/main/Images/Datapath_3.png "LUMOS Datapath Section 3")
+3.The loop label indicates the start of a loop.
 
-## Synthesis
+4.The loop label indicates the start of a loop.
 
-This processor core is synthesizable in the 45nm CMOS technology node. LUMOS has gone through the RTL-to-GDS flow using *Synopsys Design Compiler* and *Cadence SoC Encounter* tools. At this node, the core can achieve a frequency of **500MHz** while occupying **12000um2** of area and consuming around **3mw** of power.
-</div>
+  flw loads single-precision floating-point values from memory into registers f1 and f2.
 
-<!-- ![Alt text](https://github.com/IUST-Computer-Organization/LUMOS/blob/main/LUMOS.png "The LUMOS microprocessor synthesized with Design Compiler and placed and routed by Cadence Encounter" =300x300)  -->
+  fmul.s multiplies the values in f1 and f2, storing the result in f10.
 
-<picture>
-    <img 
-        alt="The LUMOS microprocessor synthesized with Design Compiler and placed and routed by Cadence Encounter" 
-        src="https://github.com/IUST-Computer-Organization/LUMOS/blob/main/Images/LUMOS.png"
-        width="550" 
-        height="550"
-    > 
-</picture> 
+  fadd.s adds the values in f10 and f20, storing the result in f30.
 
+  fsqrt.s computes the square root of f30 and stores it in x3.
 
-## Copyright
+  fadd.s adds the value in f0 with f3.
 
-Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
+Fixed-Point Unit Module:
 
-Copyright 2024 Iran University of Science and Technology - iustCompOrg@gmail.com  
+ Parameters:
 
-</div>
+  1.WIDTH: Bit width (default is 32 bits).
+
+  2.FBITS: Number of fractional bits (default is 10).
+
+ Inputs:
+
+  1.clk: Clock signal.
+
+  2.reset: Reset signal.
+
+  3.operand_1: First operand (signed or unsigned).
+
+  4.operand_2: Second operand (signed or unsigned).
+
+  5.operation: Control signal for the desired operation (addition, subtraction, multiplication, or square 
+
+  root).
+
+ Outputs:
+  
+  1.result: Result of the operation.
+
+  2.ready: Signal indicating when the result is valid.
+
+  3.The case statement handles different operations based on the operation input.
+
+  4.The always @(posedge reset) block resets the ready signal.
+
+  5.The root and product signals are placeholders for the square root and multiplication results. 
+
+Square Root Circuit :
+
+ 1. root
+
+  This signal is declared as reg [WIDTH - 1 : 0] root;.
+
+  It  represents the result of the square root calculation.
+
+  The width of root is determined by the WIDTH parameter (default is 32 bits).
+
+ 2. root_ready 
+
+   This signal is declared as reg root_ready;.
+
+   It indicates when the square root result is ready or valid.
+
+ 3.module sqrt_subtraction
+
+   Inputs:
+
+    radicand: A 16-bit input representing the value for which we want to find the square root.
+
+   Outputs:
+    root: An 8-bit output representing the approximate square root of the input.
+
+    Here’s a step-by-step explanation of the code:
+
+    The always @(*) block indicates that this is a combinational logic block that updates whenever any of 
+    
+    its inputs change.
+
+    The remainder variable is initialized to the value of radicand.
+
+    The root_reg variable is also initialized to zero.
+
+    The loop iterates from i = 0 to i = 7.
+
+    Inside the loop:
+
+    If remainder is greater than or equal to 2 * root_reg, it subtracts 2 * root_reg from remainder and 
+    
+    increments root_reg.
+
+    Finally, root_reg is shifted left by one bit (effectively multiplying it by 2).
+
+    The final value of root_reg represents the approximate square root of the input.
+
+Multiplier multiplier_circuit:
+ 
+ Inputs:
+   .operand_1(multiplierCircuitInput1)
+
+   .operand_2(multiplierCircuitInput2)
+
+    operand_1: First operand (16 bits wide).
+
+    operand_2: Second operand (also 16 bits wide).
+
+  Outputs:
+    
+    .product(multiplierCircuitResult)
+
+     product: Result of the multiplication (32 bits wide).
+  
+  Partial Products:
+
+     reg     [31 : 0] partialProduct1;
+
+    reg     [31 : 0] partialProduct2;
+
+    reg     [31 : 0] partialProduct3;
+
+    reg     [31 : 0] partialProduct4;
+
+     The partialProduct1, partialProduct2, partialProduct3, and partialProduct4 signals are declared as 
+
+     32-bit registers.
+
+     These represent intermediate results during the multiplication process.
+
+ module multiplier_32bit :
+
+  Module Declaration:
+
+    The module is named multiplier_32bit.
+
+    It has three ports:
+
+      A and B are 32-bit inputs.
+
+    product is a 64-bit output.
+
+    Wires:
+
+    The module defines several wires:
+
+    Ah, Al, Bh, and Bl are 32-bit wires. 
+
+    partial_product1, partial_product2, partial_product3, and partial_product4 are 64-bit wires. 
+
+  Segment Splitting:
+
+    The input vectors A and B are split into high and low segments:
+
+    {Ah, Al} = A extracts the high (Ah) and low (Al) parts of A.
+
+    {Bh, Bl} = B extracts the high (Bh) and low (Bl) parts of B.
+
+  Partial Products:
+
+    Four partial products are calculated:
+
+    partial_product1 = Ah * Bh
+
+    partial_product2 = Ah * Bl
+
+    partial_product3 = Al * Bh
+
+    partial_product4 = Al * Bl
+
+  Combination of Partial Products:
+
+    The always @(*) block computes the final product:
+
+    partialProduct1 is assigned the value of partial_product4 (which is Al * Bl).
+
+    partialProduct2 is left-shifted by 16 bits.
+
+    partialProduct3 is left-shifted by 32 bits.
+
+    partialProduct4 is left-shifted by 48 bits.
+
+    The product output is the sum of these partial products.
+    
