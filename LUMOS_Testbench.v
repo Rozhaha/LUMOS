@@ -11,7 +11,7 @@
 `timescale 1 ns / 1 ns
 
 `include "Defines.vh"
-`include "LUMOS.v"
+`include "syn.v"
 
 `ifndef FIRMWARE
     `define FIRMWARE "Firmware\\Firmware.hex"
@@ -47,7 +47,7 @@ module LUMOS_Testbench;
     wire memoryEnable;
     reg memoryReady;
 
-    LUMOS 
+    LUMOS
     #(
         .RESET_ADDRESS(32'h0000_0000)
     )
