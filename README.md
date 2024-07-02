@@ -1,6 +1,6 @@
 Name: Rozha Hasheminezhad
 
-Team member: Jeyran Tarbiti
+Team member: Jeyran Tarbiati
 
 Student ID: 400413494_400411261
 
