@@ -1,4 +1,5 @@
-//  LUMOS - Light Utilization with Multicycle Operational Stages
+
+// LUMOS - Light Utilization with Multicycle Operational Stages
 //  A RISC-V RV32I Processor Core
 
 //  Description: LUMOS Core Top-level Module
